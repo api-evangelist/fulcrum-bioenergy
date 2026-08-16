@@ -1,17 +1,78 @@
 aid: fulcrum-bioenergy
 name: Fulcrum BioEnergy
-description: 'Fulcrum BioEnergy is a company surfaced via the API Evangelist harvest backlog (source:
-  secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Fulcrum BioEnergy, Inc. was a Pleasanton, California waste-to-fuels project developer
+  founded in 2007 that converted municipal solid waste into synthetic crude oil for
+  refining into sustainable aviation fuel (SAF) and diesel, using a shred-and-sort
+  feedstock line feeding a gasifier and a Fischer-Tropsch conversion train. Its first and
+  only commercial plant, the Sierra BioFuels Plant in the Tahoe Reno Industrial Center
+  outside Reno, Nevada, was designed to take roughly 175,000-219,000 tons of household
+  garbage a year from an adjacent feedstock processing facility and began production in
+  late 2022. The company raised on the order of a billion dollars in equity, debt and
+  government support over its life, including strategic investments and offtake alliances
+  with United Airlines, Waste Management, Cathay Pacific Airways, Marubeni and bp, plus a
+  US Department of Energy loan guarantee, USDA loan guarantee and Department of Defense
+  grants; E. James Macias led it as president and CEO through its build-out years, and it
+  had announced follow-on projects including a Gary, Indiana plant and the NorthPoint
+  facility in the UK. The Sierra plant stopped operating in mid-May 2024 after persistent
+  equipment problems, the company laid off essentially its entire workforce and took its
+  website down, and on 2024-09-09 Fulcrum BioEnergy, Fulcrum Sierra Holdings and Fulcrum
+  Sierra Finance Co. filed voluntary Chapter 11 petitions in the US Bankruptcy Court for
+  the District of Delaware listing more than $456 million owed to over 200 creditors. A
+  November 2024 auction sold the biorefinery to Switch, Ltd. for $55 million and the
+  adjacent feedstock processing facility to Refuse Inc., a WM subsidiary; the plan of
+  liquidation was confirmed in April 2025 and went effective in May 2025. Fulcrum was an
+  industrial energy project developer rather than a software company and never published a
+  developer program, public API, SDK, webhook surface, or machine-readable specification —
+  a Wayback index of its corporate site from 2008 through 2024 turns up no developer,
+  reference, or spec path of any kind. Its corporate host fulcrum-bioenergy.com no longer
+  resolves to any web server, and the alternate registration fulcrumbioenergy.com is parked
+  on the GoDaddy/Afternic aftermarket and listed for sale. This profile is retained as a
+  historical record; there is no API surface to enrich.
 url: https://raw.githubusercontent.com/api-evangelist/fulcrum-bioenergy/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
 x-tier: stub
-x-tier-reason: harvest
+x-tier-reason: defunct-no-api-surface
+x-status: defunct
+x-founded: '2007'
+x-headquarters: Pleasanton, California, United States
+x-bankruptcy-filed: '2024-09-09'
+x-shutdown-date: '2025-05-01'
+x-shutdown-note: >-
+  Sierra BioFuels Plant ceased operation mid-May 2024; Chapter 11 filed 2024-09-09 in the
+  District of Delaware with $456M+ in obligations; assets auctioned November 2024 (Switch,
+  Ltd. took the biorefinery for $55M, Refuse Inc./WM took the feedstock facility); plan of
+  liquidation confirmed April 2025 and effective May 2025.
+x-domain-status: offline
+x-domain-note: >-
+  fulcrum-bioenergy.com (registered 2007-04-03, renewed to 2034) still has an Azure DNS
+  zone with MX and SPF records but NO A or AAAA record, so no HTTP request to it can
+  connect. The separate registration fulcrumbioenergy.com (2017) is parked on
+  GoDaddy/Afternic, is listed for sale, and answers HTTP 200 with the same 114-byte HTML
+  redirect stub on EVERY path including all /.well-known/* and spec paths — including a
+  well-formed llms.txt that describes the DOMAIN SALE, not the company. Those 200s are not
+  documents. Neither host is wired as a Website pointer. See
+  well-known/fulcrum-bioenergy-well-known.yml.
+x-disambiguation: >-
+  NOT related to Fulcrum / fulcrumapp (Spatial Networks), the mobile field-data-collection
+  company that publishes an OpenAPI, JavaScript/Python/Ruby SDKs and docs.fulcrumapp.com.
+  Same first word, different company. Never attribute that API surface to this profile.
 specificationVersion: '0.20'
 created: '2026-08-16'
 modified: '2026-08-16'
 tags:
 - Company
+- Defunct
+- Energy
+- Biofuels
+- Sustainable Aviation Fuel
+- Renewable Fuels
+- Waste to Energy
+- Waste Management
+- Cleantech
+- Industrial
+- Manufacturing
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -19,5 +80,35 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
-- type: Website
+- type: Listing
   url: https://forgeglobal.com/fulcrum-bioenergy_stock/
+  name: Forge Global secondary-market listing (harvest source, not a company website)
+x-coverage:
+  state: none
+  reason: defunct
+  detail: >-
+    Fulcrum BioEnergy was a waste-to-SAF plant developer, not a software company; it shut
+    the Sierra BioFuels Plant in May 2024, filed Chapter 11 that September and completed
+    liquidation in May 2025, and today its corporate domain fulcrum-bioenergy.com has no A
+    record at all while the alternate fulcrumbioenergy.com is a GoDaddy for-sale lander
+    that returns the same 114-byte HTML stub with HTTP 200 on every path, including
+    /openapi.json and every /.well-known/ path.
+  evidence:
+  - url: https://www.fulcrumbioenergy.com/
+    status: 200
+  - url: https://www.fulcrumbioenergy.com/openapi.json
+    status: 200
+  - url: https://www.fulcrumbioenergy.com/.well-known/agent-card.json
+    status: 200
+  - url: https://api.github.com/orgs/fulcrum-bioenergy
+    status: 404
+  - url: https://pypi.org/pypi/fulcrum-bioenergy/json
+    status: 404
+  - url: https://forgeglobal.com/fulcrum-bioenergy_stock/
+    status: 403
+  checked: '2026-08-16'
+x-enrichment:
+  date: '2026-08-16'
+  status: nochange
+  artifacts_added: 1
+  pass: local-v1

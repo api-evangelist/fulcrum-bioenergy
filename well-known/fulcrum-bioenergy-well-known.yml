@@ -1,0 +1,290 @@
+generated: '2026-08-16'
+method: probed
+source: https://www.fulcrumbioenergy.com/
+name: Fulcrum BioEnergy well-known + contract discovery probe
+description: >-
+  Negative probe record for Fulcrum BioEnergy. The company filed Chapter 11 in Delaware on
+  2024-09-09, sold its assets at auction in November 2024 (Switch, Ltd. took the Sierra
+  BioFuels biorefinery; Refuse Inc., a WM subsidiary, took the adjacent feedstock processing
+  facility), and its plan of liquidation went effective in May 2025. Its corporate host
+  fulcrum-bioenergy.com no longer resolves to any web server — the zone still exists on
+  Azure DNS and still carries MX/SPF records, but there is no A or AAAA record, so every
+  HTTP request fails to connect. The alternate registration fulcrumbioenergy.com (no hyphen)
+  is parked on GoDaddy/Afternic and listed for sale; it answers HTTP 200 with the SAME
+  114-byte HTML redirect shell for EVERY path, including every /.well-known/* and every spec
+  path. NONE of those 200s is a document. No WellKnown, SecurityTxt, AgentCard, LLMsTxt or
+  OpenAPI pointer is emitted from this probe, and none should ever be emitted from it in a
+  later round.
+
+hosts:
+- host: fulcrum-bioenergy.com
+  role: former corporate website (the company's real domain, registered 2007-04-03)
+  controlled_by_provider: unknown
+  disposition: dns-only-no-web-host
+  dns:
+    a: []
+    aaaa: []
+    ns:
+    - ns1-06.azure-dns.com
+    - ns2-06.azure-dns.net
+    - ns3-06.azure-dns.org
+    - ns4-06.azure-dns.info
+    mx:
+    - d248788a.ess.barracudanetworks.com
+    - d248788b.ess.barracudanetworks.com
+    txt_spf: v=spf1 a ip4:72.52.68.10 ip4:104.42.16.251 include:spf.ess.barracudanetworks.com
+      include:servers.mcsv.net -all
+  http:
+    url: https://fulcrum-bioenergy.com/
+    status: null
+    curl_exit: 6
+    result: could-not-resolve-web-host
+  registrar: GoDaddy.com, LLC
+  domain_created: '2007-04-03'
+  domain_expires: '2034-04-03'
+  note: >-
+    The registration is still held and renewed out to 2034 and the mail zone is still
+    configured, but the website itself was taken offline after May 2024. No path on this
+    host can be probed because there is no address record to connect to.
+
+- host: www.fulcrumbioenergy.com
+  role: alternate/defensive registration, now a domain-sale lander
+  controlled_by_provider: false
+  disposition: parked-for-sale
+  registrar: GoDaddy.com, LLC
+  registrant_organization: Domains By Proxy, LLC
+  domain_created: '2017-07-11'
+  domain_expires: '2027-07-11'
+  nameservers:
+  - ns1.afternic.com
+  - ns2.afternic.com
+  dns:
+    a:
+    - 13.248.169.48
+    - 76.223.54.146
+  note: >-
+    Root serves <html><head><script>window.onload=...href="/lander"</script></head></html>
+    (114 bytes). /lander itself is served from forsale.godaddy.com and returned 403 Access
+    Denied (Akamai) to a non-browser client. Wildcard DNS answers for api./docs./developer.
+    subdomains too, but TLS to those names fails to connect.
+
+soft_200_catch_all: true
+soft_200_note: >-
+  Every probed path on www.fulcrumbioenergy.com returned HTTP 200 with content-type
+  text/html and content-length 114 — the identical parking redirect stub. Treat all of
+  them as misses. This is the soft-404 false-credit pattern; a 200 is not evidence.
+
+probes:
+- path: /.well-known/security.txt
+  url: https://www.fulcrumbioenergy.com/.well-known/security.txt
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/openid-configuration
+  url: https://www.fulcrumbioenergy.com/.well-known/openid-configuration
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/oauth-authorization-server
+  url: https://www.fulcrumbioenergy.com/.well-known/oauth-authorization-server
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/oauth-protected-resource
+  url: https://www.fulcrumbioenergy.com/.well-known/oauth-protected-resource
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/api-catalog
+  url: https://www.fulcrumbioenergy.com/.well-known/api-catalog
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/ai-plugin.json
+  url: https://www.fulcrumbioenergy.com/.well-known/ai-plugin.json
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+- path: /.well-known/agent-card.json
+  url: https://www.fulcrumbioenergy.com/.well-known/agent-card.json
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+  note: HTML shell, not a JSON AgentCard object. No AgentCard pointer emitted.
+- path: /.well-known/agent.json
+  url: https://www.fulcrumbioenergy.com/.well-known/agent.json
+  status: 200
+  content_type: text/html
+  bytes: 114
+  document: false
+  result: miss
+  file: null
+  note: Legacy pre-0.3 path. HTML shell, not a JSON AgentCard object.
+
+contract_discovery:
+  openapi:
+  - url: https://www.fulcrumbioenergy.com/openapi.json
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  - url: https://www.fulcrumbioenergy.com/openapi.yaml
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  - url: https://www.fulcrumbioenergy.com/swagger.json
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  - url: https://www.fulcrumbioenergy.com/api-docs
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  - url: https://www.fulcrumbioenergy.com/docs
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  - url: https://www.fulcrumbioenergy.com/redoc
+    status: 200
+    parses_as_openapi: false
+    result: miss
+  - url: https://fulcrum-bioenergy.com/
+    status: null
+    parses_as_openapi: false
+    result: no-web-host
+  graphql: []
+  mcp: []
+  a2a_agent_card: []
+  api_hosts_resolved:
+  - host: api.fulcrumbioenergy.com
+    dns: wildcard-a-record
+    status: null
+    note: Resolves via the parking wildcard but TLS connection fails; not a real API host.
+  - host: docs.fulcrumbioenergy.com
+    dns: wildcard-a-record
+    status: null
+    note: Resolves via the parking wildcard but TLS connection fails; not a real docs host.
+  - host: developer.fulcrumbioenergy.com
+    dns: wildcard-a-record
+    status: null
+    note: Resolves via the parking wildcard but TLS connection fails.
+
+llms_txt:
+  url: https://www.fulcrumbioenergy.com/llms.txt
+  status: 200
+  content_type: text/plain
+  bytes: 610
+  is_real_llms_txt: true
+  published_by: GoDaddy aftermarket parking system
+  attributable_to_provider: false
+  verbatim: |
+    # www.fulcrumbioenergy.com
+
+    > www.fulcrumbioenergy.com is a domain name currently listed for sale on GoDaddy's aftermarket. It is available via Buy-It-Now, Make-an-Offer, or Lease-to-Own, depending on the listing's current configuration.
+
+    ## Status
+    - For sale: Yes
+    - Listed on: GoDaddy (aftermarket)
+    - Marketplace listing: https://forsale.godaddy.com/forsale/www.fulcrumbioenergy.com
+    - Escrow / transfer: GoDaddy-backed, typical 5-7 business-day completion
+
+    ## How to buy
+    - Buy It Now, Make an Offer, or Lease-to-Own options are presented on the listing page.
+    - Transactions are protected by GoDaddy escrow.
+  note: >-
+    This IS a well-formed llms.txt document, but it is published by GoDaddy's domain-sale
+    parking system and it describes the DOMAIN LISTING, not Fulcrum BioEnergy. It is
+    recorded as a MISS for the provider and NO LLMsTxt pointer is emitted. Worth flagging
+    for the pipeline generally: parked-domain landers have started serving real llms.txt
+    files, so a 200 with valid llms.txt structure is no longer sufficient evidence that a
+    provider published it — check who the document is about.
+
+robots_txt:
+  url: https://www.fulcrumbioenergy.com/robots.txt
+  status: 200
+  bytes: 66
+  verbatim: |
+    User-agent: *
+    Allow: /
+    LLM-Policy: /llms.txt
+    Sitemap: /sitemap.xml
+  note: GoDaddy parking boilerplate.
+
+sitemap:
+  url: https://www.fulcrumbioenergy.com/sitemap.xml
+  status: 200
+  urls:
+  - https://www.fulcrumbioenergy.com/lander
+  note: Single parking-lander URL. No content, no reference pages.
+
+other_surfaces:
+- what: GitHub organization
+  url: https://api.github.com/orgs/fulcrum-bioenergy
+  status: 404
+  result: miss
+- what: GitHub organization
+  url: https://api.github.com/orgs/fulcrumbioenergy
+  status: 404
+  result: miss
+- what: GitHub repository search "fulcrum bioenergy"
+  url: https://api.github.com/search/repositories?q=fulcrum+bioenergy
+  status: 200
+  result: miss
+  note: total_count 0.
+- what: npm registry search "fulcrum-bioenergy"
+  url: https://registry.npmjs.org/-/v1/search?text=fulcrum-bioenergy
+  status: 200
+  result: miss
+  note: >-
+    OWNERSHIP CHECK. Every "fulcrum" package on npm (fulcrum-app, fulcrum-schema,
+    fulcrum-query-sql) belongs to Fulcrum / fulcrumapp (Spatial Networks), a mobile
+    field-data-collection company at docs.fulcrumapp.com. That is a DIFFERENT company
+    with no relationship to Fulcrum BioEnergy. Its OpenAPI, SDKs and GitHub org must
+    never be attributed to this profile.
+- what: PyPI package fulcrum-bioenergy
+  url: https://pypi.org/pypi/fulcrum-bioenergy/json
+  status: 404
+  result: miss
+- what: Wayback CDX index of fulcrum-bioenergy.com paths matching api|develop|doc
+  url: https://web.archive.org/cdx/search/cdx?url=fulcrum-bioenergy.com*&filter=original:.*(api|develop|doc).*
+  status: 200
+  result: miss
+  note: >-
+    Every match is either /documents/*.pdf (press-release PDFs, 2008-2015) or a mangled
+    link to api.oilandgaswatch.org, a third-party site. The archived corporate site had no
+    developer portal, no API reference, and no machine-readable specification at any point
+    in its 2008-2024 history.
+- what: Forge Global secondary-market listing (the harvest source)
+  url: https://forgeglobal.com/fulcrum-bioenergy_stock/
+  status: 403
+  result: blocked
+  note: >-
+    Forge returns 403 to non-browser clients; it is a secondary-market share listing, not
+    a company site. Per roadmap#56 it is NOT wired as this profile's Website pointer.
+
+conclusion: >-
+  Fulcrum BioEnergy was a waste-to-fuels project developer, not a software company. It
+  never published a developer program, API, SDK, or machine-readable specification, and it
+  no longer operates. There is no API surface to enrich and no live host the company still
+  controls. This is a historical record, not a thin profile. Any future round should
+  re-read hosts[] before probing either domain again.
