@@ -58,6 +58,17 @@ x-disambiguation: >-
   NOT related to Fulcrum / fulcrumapp (Spatial Networks), the mobile field-data-collection
   company that publishes an OpenAPI, JavaScript/Python/Ruby SDKs and docs.fulcrumapp.com.
   Same first word, different company. Never attribute that API surface to this profile.
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 specificationVersion: '0.23'
 created: '2026-08-16'
 modified: '2026-08-16'
